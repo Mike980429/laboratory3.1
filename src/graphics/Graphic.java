@@ -118,7 +118,7 @@ public class Graphic extends JFrame{
 		return fiba;
 	}
 	
-	public void assignSearch(int num) throws Exception{
+	public void assignSearch(int num) {
 		switch(num) {
 		case 1:
 			fiba.searchPlayerPointGame(num);

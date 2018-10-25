@@ -7,33 +7,35 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import ABB.ABB;
 import ABB.NodeTree;
+import ARB.ARB;
 import AVL.AVL;
 
 public class FIBA {
 	
-	private AVL<Double,Player> root ;
-//	private AVL<Double,Player> rootReboundGame ;
-//	private AVL<Double,Player> rootAssistsGame ;
-//	private AVL<Double,Player> rootBlocksGame ;
-//	private AVL<Double,Player> rootTheftGame ;
+	private ABB<Double,Player> root ;
+	private AVL<Double,Player> rootReboundGame ;
+	private ARB<Double,Player> rootAssistsGame ;
+	private AVL<Double,Player> rootBlocksGame ;
+	private AVL<Double,Player> rootTheftGame ;
 	
 	public FIBA() {
 		// TODO Auto-generated constructor stub
-		root=new AVL<Double,Player>();
-//		rootReboundGame=new AVL<Double,Player>();
-//		rootBlocksGame=new AVL<Double,Player>();
-//		rootAssistsGame=new AVL<Double,Player>();
-//		rootTheftGame=new AVL<Double,Player>();
+		root=new ABB<Double,Player>();
+		rootReboundGame=new AVL<Double,Player>();
+		rootBlocksGame=new AVL<Double,Player>();
+		rootAssistsGame=new ARB<Double,Player>();
+		rootTheftGame=new AVL<Double,Player>();
 		
 	}
 	
-	public void addPlayer(Player newPlayer) {
-		root.insertar(newPlayer.getPointGame(),newPlayer);
-//		rootReboundGame.insertar(newPlayer.getReboundGame(),newPlayer);
-//		rootBlocksGame.insertar(newPlayer.getBlocksGame(),newPlayer);
-//		rootAssistsGame.insertar(newPlayer.getAssistsGame(),newPlayer);
-//		rootTheftGame.insertar(newPlayer.getTheftGame(),newPlayer);
+	public void addPlayer(Player newPlayer) throws Exception{
+		root.insertar(newPlayer.statisticalItem(),newPlayer);
+		rootReboundGame.insertar(newPlayer.getReboundGame(),newPlayer);
+		rootBlocksGame.insertar(newPlayer.getBlocksGame(),newPlayer);
+		rootAssistsGame.insertar(newPlayer.getAssistsGame(),newPlayer);
+		rootTheftGame.insertar(newPlayer.getTheftGame(),newPlayer);
 	}
 	
 	
@@ -68,10 +70,10 @@ public class FIBA {
 	public Player searchPlayerReboundGame(double num) {
 		
 		Player search=null;
-		if(root.getRoot().getV().getPointGame()==num) {
-			return root.getRoot().getV();
+		if(rootReboundGame.getRoot().getV().getPointGame()==num) {
+			return rootReboundGame.getRoot().getV();
 		}else {
-			NodeTree<Double, Player> node=root.getRoot();
+			NodeTree<Double, Player> node=rootReboundGame.getRoot();
 			while(node != null){
 				if(node.getV().getPointGame()> num){
 					node = node.getLeft();
@@ -92,10 +94,10 @@ public class FIBA {
 	public Player searchPlayerBlocksGame(double num) {
 		
 		Player search=null;
-		if(root.getRoot().getV().getPointGame()==num) {
-			return root.getRoot().getV();
+		if(rootBlocksGame.getRoot().getV().getPointGame()==num) {
+			return rootBlocksGame.getRoot().getV();
 		}else {
-			NodeTree<Double, Player> node=root.getRoot();
+			NodeTree<Double, Player> node=rootBlocksGame.getRoot();
 			while(node != null){
 				if(node.getV().getPointGame()> num){
 					node = node.getLeft();
@@ -115,10 +117,10 @@ public class FIBA {
 	public Player searchPlayerTheftGame(double num) {
 		
 		Player search=null;
-		if(root.getRoot().getV().getPointGame()==num) {
-			return root.getRoot().getV();
+		if(rootTheftGame.getRoot().getV().getPointGame()==num) {
+			return rootTheftGame.getRoot().getV();
 		}else {
-			NodeTree<Double, Player> node=root.getRoot();
+			NodeTree<Double, Player> node=rootTheftGame.getRoot();
 			while(node != null){
 				if(node.getV().getPointGame()> num){
 					node = node.getLeft();
@@ -138,10 +140,10 @@ public class FIBA {
 	public Player searchPlayerAssistsGame(double num) {
 		
 		Player search=null;
-		if(root.getRoot().getV().getPointGame()==num) {
-			return root.getRoot().getV();
+		if(rootAssistsGame.getRoot().getV().getPointGame()==num) {
+			return rootAssistsGame.getRoot().getV();
 		}else {
-			NodeTree<Double, Player> node=root.getRoot();
+			NodeTree<Double, Player> node=rootAssistsGame.getRoot();
 			while(node != null){
 				if(node.getV().getPointGame()> num){
 					node = node.getLeft();
@@ -159,14 +161,6 @@ public class FIBA {
 		return search;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
 	public void savePlayerSerializable( ){
 		
 		try{
@@ -185,6 +179,8 @@ public class FIBA {
 		}
 		
 	}
+	
+	
 	
 	
 }
