@@ -6,7 +6,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
+
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 import ABB.ABB;
 import ABB.NodeTree;
@@ -20,14 +23,14 @@ public class FIBA {
 	private ABB<Double,Player> root ;
 	private AVL<Double,Player> rootReboundGame ;
 	private ARB<Double,Player> rootAssistsGame ;
-	private HashTable<Double,Player> rootBlocksGame ;
+	private HashMap<Double,Player> rootBlocksGame ;
 	private Queue<Player> rootTheftGame ;
 	
 	public FIBA() {
 		// TODO Auto-generated constructor stub
 		root=new ABB<Double,Player>();
 		rootReboundGame=new AVL<Double,Player>();
-		rootBlocksGame=new HashTable<Double,Player>();
+		rootBlocksGame=new HashMap<Double,Player>();
 		rootAssistsGame=new ARB<Double,Player>();
 		rootTheftGame=new Queue<Player>();
 		
@@ -94,17 +97,24 @@ public class FIBA {
 		return search;
 	}
 	
-	public Player searchPlayerBlocksGame(double num) {
+	public ArrayList<Player> searchPlayerBlocksGame(double num) {
 		
 		ArrayList<Player> search=null;
 		
 		
-		
+		java.util.Iterator<Double> iter= rootBlocksGame.keySet().iterator();
+		while(iter.hasNext()) {
+			Double key=iter.next();
 			
+			if(rootBlocksGame.get(key).getBlocksGame()==num) {
+				search.add(rootBlocksGame.get(key));
+			}
 		}
+		
 		
 		return search;
 	}
+	
 	public Player searchPlayerTheftGame(double num) {
 		
 		Player search=null;
@@ -128,6 +138,7 @@ public class FIBA {
 		
 		return search;
 	}
+	
 	public Player searchPlayerAssistsGame(double num) {
 		
 		Player search=null;
