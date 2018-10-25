@@ -1,8 +1,10 @@
 package model;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -38,7 +40,33 @@ public class FIBA {
 		rootTheftGame.insertar(newPlayer.getTheftGame(),newPlayer);
 	}
 	
-	
+		public void readArchive(String address) {
+
+		String line = "";
+		String separator = ",";
+		
+		try {
+			BufferedReader br= new BufferedReader(new FileReader(address));
+		    while ((line = br.readLine()) != null) {                
+		        String[] datos = line.split(separator);
+		    
+		       System.out.println(datos[0] + ", " + datos[1] + ", " + datos[2] + ", " + datos[3] + ", " + datos[4] + ", " + datos[5]);
+		    }
+		} catch (FileNotFoundException e) {
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} finally {
+		    if (br != null) {
+		        try {
+		            br.close();
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		    }
+		}
+		
+	}
 	
 	
 	
@@ -178,7 +206,33 @@ public class FIBA {
 			e.printStackTrace();
 		}
 		
-	}
+	} 
+	
+//	public void persistenceOn() throws FileNotFoundException, IOException, ClassNotFoundException {
+//		// TODO test it
+//		// initialize players added:
+//		ObjectInputStream hashMapReader = new ObjectInputStream(new FileInputStream(./docs));
+//		this.playersAdded = (HashMap<String, Integer>) hashMapReader.readObject();
+//		hashMapReader.close();
+//		// initialize bts tree:
+//		ObjectInputStream btsReader = new ObjectInputStream(new FileInputStream(BTS_OBJECT_PATH));
+//		this.BTSTree = (BinarySearchTree) btsReader.readObject();
+//		btsReader.close();
+//		// initialize avl tree:
+//		ObjectInputStream avlReader = new ObjectInputStream(new FileInputStream(AVL_OBJECT_PATH));
+//		this.AVlTree = (AVLTree) avlReader.readObject();
+//		avlReader.close();
+//		// initialize red black tree:
+//		ObjectInputStream rbReader = new ObjectInputStream(new FileInputStream(RBT_OBJECT_PATH));
+//		this.RBTree = (RedBlackTree) rbReader.readObject();
+//		rbReader.close();
+//		// initialize queue with availabe indexs
+//		ObjectInputStream queueReader = new ObjectInputStream(new FileInputStream(QUEUE_OBJECT_PATH));
+//		this.availableIndexs = (Queue<Integer>) queueReader.readObject();
+//		queueReader.close();
+//
+//	}
+	
 	
 	
 	
