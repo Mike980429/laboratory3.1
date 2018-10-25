@@ -8,36 +8,39 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import ABB.ABB;
 import ABB.NodeTree;
 import ARB.ARB;
 import AVL.AVL;
+import hashTable.HashTable;
+import queue.Queue;
 
 public class FIBA {
 	
 	private ABB<Double,Player> root ;
 	private AVL<Double,Player> rootReboundGame ;
 	private ARB<Double,Player> rootAssistsGame ;
-	private AVL<Double,Player> rootBlocksGame ;
-	private AVL<Double,Player> rootTheftGame ;
+	private HashTable<Double,Player> rootBlocksGame ;
+	private Queue<Player> rootTheftGame ;
 	
 	public FIBA() {
 		// TODO Auto-generated constructor stub
 		root=new ABB<Double,Player>();
 		rootReboundGame=new AVL<Double,Player>();
-		rootBlocksGame=new AVL<Double,Player>();
+		rootBlocksGame=new HashTable<Double,Player>();
 		rootAssistsGame=new ARB<Double,Player>();
-		rootTheftGame=new AVL<Double,Player>();
+		rootTheftGame=new Queue<Player>();
 		
 	}
 	
 	public void addPlayer(Player newPlayer) throws Exception{
 		root.insertar(newPlayer.statisticalItem(),newPlayer);
 		rootReboundGame.insertar(newPlayer.getReboundGame(),newPlayer);
-		rootBlocksGame.insertar(newPlayer.getBlocksGame(),newPlayer);
+		rootBlocksGame.put(newPlayer.getBlocksGame(),newPlayer);
 		rootAssistsGame.insertar(newPlayer.getAssistsGame(),newPlayer);
-		rootTheftGame.insertar(newPlayer.getTheftGame(),newPlayer);
+		rootTheftGame.enQueue(newPlayer);
 	}
 	
 		public void readArchive(String address) {
@@ -121,21 +124,9 @@ public class FIBA {
 	
 	public Player searchPlayerBlocksGame(double num) {
 		
-		Player search=null;
-		if(rootBlocksGame.getRoot().getV().getPointGame()==num) {
-			return rootBlocksGame.getRoot().getV();
-		}else {
-			NodeTree<Double, Player> node=rootBlocksGame.getRoot();
-			while(node != null){
-				if(node.getV().getPointGame()> num){
-					node = node.getLeft();
-					
-				}else if(node.getV().getPointGame()== num){
-					search=node.getV();
-				}else {
-					node = node.getRight();
-				}
-			}
+		ArrayList<Player> search=null;
+		
+		
 		
 			
 		}
