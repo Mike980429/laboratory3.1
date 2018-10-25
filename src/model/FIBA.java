@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import ABB.ABB;
 import ABB.NodeTree;
@@ -17,7 +18,7 @@ public class FIBA {
 	private ABB<Double,Player> root ;
 	private AVL<Double,Player> rootReboundGame ;
 	private ARB<Double,Player> rootAssistsGame ;
-	private AVL<Double,Player> rootBlocksGame ;
+	private Hashtable<Double,Player> rootBlocksGame ;
 	private AVL<Double,Player> rootTheftGame ;
 	
 	public FIBA() {
