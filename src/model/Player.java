@@ -6,9 +6,6 @@ import AVL.AVL;
 
 public class Player{
 
-	private Player playerLeft;
-	private Player playerRight;
-
 	private String name;
 	private int age;
 	private String team;
@@ -31,43 +28,15 @@ public class Player{
 		this.assistsGame=assistsGame;
 		this.blocksGame=blocksGame;
 		this.theftGame=theftGame;
-		this.playerLeft=null;
-		this.playerRight=null;
+
 	}
 
 	public double statisticalItem() {
 		double statistical=0;
-	
 		statistical=(pointGame+reboundGame+assistsGame+blocksGame+theftGame)/5;
-		
-		
 		return statistical;
 	}
 	
-	public Player getPlayerLeft() {
-		return playerLeft;
-	}
-
-
-
-	public void setPlayerLeft(Player playerLeft) {
-		this.playerLeft = playerLeft;
-	}
-
-
-
-	public Player getPlayerRight() {
-		return playerRight;
-	}
-
-
-
-	public void setPlayerRight(Player playerRight) {
-		this.playerRight = playerRight;
-	}
-
-
-
 	public String getName() {
 		return name;
 	}

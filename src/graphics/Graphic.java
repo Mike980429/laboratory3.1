@@ -71,7 +71,7 @@ public class Graphic extends JFrame{
 	
 	public void addPlayer(String name,int age, String team,double pointGame, int reboundGame,int assistsGame,int blocksGame, int theftGame){
 		Player newPlayer=new Player(name,age,team,pointGame,reboundGame,assistsGame,blocksGame,theftGame);
-		fiba.addPlayer(,newPlayer);
+	//	fiba.addPlayer(,newPlayer);
 //		this.platform.savePlayerSerializable(nickName, pin, geoLocation, ability, platform);
 //		viewListPlayers();
 
@@ -118,21 +118,23 @@ public class Graphic extends JFrame{
 		return fiba;
 	}
 	
-	public void assignSearch(int num) {
+	public void assignSearch(int num) throws Exception{
 		switch(num) {
 		case 1:
-			
+			fiba.searchPlayerPointGame(num);
 			break;
 		case 2:
+			fiba.searchPlayerReboundGame(num);
 			break;
 		case 3:
+			fiba.searchPlayerAssistsGame(num);
 			break;
 		case 4:
+			fiba.searchPlayerBlocksGame(num);
 			break;
 		case 5:
+			fiba.searchPlayerTheftGame(num);
 			break;
-		
-		
 		}
 	}
 	
