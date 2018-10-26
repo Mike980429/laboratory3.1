@@ -3,6 +3,7 @@ package pruebas;
 import static org.junit.Assert.*;
 
 import java.awt.Color;
+import java.util.HashMap;
 
 import org.junit.Test;
 
@@ -10,8 +11,10 @@ import ABB.ABB;
 import ABB.NodeTree;
 import ARB.ARB;
 import AVL.AVL;
+import model.Player;
+import queue.Queue;
 
-public class PruebasUnitarias {
+public class PruebasUnitarias extends testCase{
 
 	
 	/*
@@ -20,18 +23,34 @@ public class PruebasUnitarias {
 	}
 	*/
 	
-	private ABB<String, String> arbolABB;
-	private ARB<String, String> arbolARB;
-	private AVL<String, String> arbolAVL;
+	private ABB<Double,Player> root ;
+	private AVL<Double,Player> rootReboundGame ;
+	private ARB<Double,Player> rootAssistsGame ;
+	private HashMap<Double,Player> rootBlocksGame ;
+	private Queue<Player> rootTheftGame ;
 	
 	private void setupEscenario1(){
-		arbolABB = new ABB<String, String>();
-		arbolABB.insertar("F", "1");
-		arbolABB.insertar("C", "2");
-		arbolABB.insertar("N", "3");
-		arbolABB.insertar("A", "4");
-		arbolABB.insertar("B", "5");
-		arbolABB.insertar("D", "6");
+		root = new ABB<Double, Player>();
+		
+		Player playerTest=new Player("emma",23,"Icesi",54.2,44.7,5,55,27.5);
+		root.insertar(playerTest.getPointGame(),playerTest);
+		
+		Player playerTest1=new Player("julian",23,"Puj",76.2,25.7,45,45,32.5);
+		root.insertar(playerTest1.getPointGame(),playerTest1);
+		
+		Player playerTest2=new Player("anna",23,"Uao",3.32,43.7,55,67,99.5);
+		root.insertar(playerTest2.getPointGame(),playerTest2);
+		
+		Player playerTest3=new Player("cristian",23,"SanBue",34.2,23.7,5,55,27.5);
+		root.insertar(playerTest3.getPointGame(),playerTest3);
+		
+		Player playerTest4=new Player("juan",23,"Icesi",121.2,43.7,6,65,67.7);
+		root.insertar(playerTest4.getPointGame(),playerTest4);
+		
+		
+		
+		
+		
 	}
 	
 	private void setupEscenario2(){
@@ -61,9 +80,10 @@ public class PruebasUnitarias {
 	public void testRotarIzquierda(){
 		setupEscenario1();
 		
-		arbolABB.rotarIzquierda(arbolABB.busquedaIterativa("A"));
+		root.rotarIzquierda(root.busquedaIterativa(54.2));
 		assertTrue(arbolABB.getRaiz().getIzquierdo().getIzquierdo().getK().equals("B"));
-		assertTrue(arbolABB.getRaiz().getIzquierdo().getIzquierdo().getIzquierdo().getK().equals("A"));
+		assertTrue
+		assertTrue(root.getRoot().getV().getPointGame()==54.2);
 		
 	}
 	
