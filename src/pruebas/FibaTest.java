@@ -23,7 +23,7 @@ class FibaTest {
 		testRotarDerechaABB();
 		testBuscarABB();
 		
-	//	testBuscarAVL();
+	
 		testRotarIzquierdaAVL();
 		testRotarDerechaAVL();
 	}
