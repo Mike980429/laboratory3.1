@@ -21,6 +21,14 @@ public class Queue<T> implements IQueue<T> {
 		objetos = new ArrayList<T>();
 	}
 
+	public ArrayList<T> getObjetos() {
+		return objetos;
+	}
+
+	public void setObjetos(ArrayList<T> objetos) {
+		this.objetos = objetos;
+	}
+
 	@Override
 	public T deQueue() {
 		// TODO Auto-generated method stub

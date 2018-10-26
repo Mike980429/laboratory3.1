@@ -2,10 +2,12 @@ package model;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,40 +40,17 @@ public class FIBA {
 		
 	}
 	
+	public void inicioPrograma() {
+		readPlayerSerializable();
+		
+	}
+	
 	public void addPlayer(Player newPlayer) throws Exception{
 		root.insertar(newPlayer.statisticalItem(),newPlayer);
 		rootReboundGame.insertar(newPlayer.getReboundGame(),newPlayer);
 		rootBlocksGame.put(newPlayer.getBlocksGame(),newPlayer);
 		rootAssistsGame.insertar(newPlayer.getAssistsGame(),newPlayer);
 		rootTheftGame.enQueue(newPlayer);
-	}
-	
-		public void readArchive(String address) {
-
-		String line = "";
-		String separator = ",";
-		
-		try {
-			BufferedReader br= new BufferedReader(new FileReader(address));
-		    while ((line = br.readLine()) != null) {                
-		        String[] datos = line.split(separator);
-		    
-		       System.out.println(datos[0] + ", " + datos[1] + ", " + datos[2] + ", " + datos[3] + ", " + datos[4] + ", " + datos[5]);
-		    }
-		} catch (FileNotFoundException e) {
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    e.printStackTrace();
-		} finally {
-		    if (br != null) {
-		        try {
-		            br.close();
-		        } catch (IOException e) {
-		            e.printStackTrace();
-		        }
-		    }
-		}
-		
 	}
 	
 	
@@ -143,25 +122,14 @@ public class FIBA {
 		return search;
 	}
 	
-	public Player searchPlayerTheftGame(double num) {
+	public ArrayList<Player> searchPlayerTheftGame(double num) {
 		
-		Player search=null;
-		if(rootTheftGame.getRoot().getV().getPointGame()==num) {
-			return rootTheftGame.getRoot().getV();
-		}else {
-			NodeTree<Double, Player> node=rootTheftGame.getRoot();
-			while(node != null){
-				if(node.getV().getPointGame()> num){
-					node = node.getLeft();
-					
-				}else if(node.getV().getPointGame()== num){
-					search=node.getV();
-				}else {
-					node = node.getRight();
-				}
+		ArrayList<Player> search= new ArrayList<>();
+		
+		for(Player actual :rootTheftGame.getObjetos()) {
+			if(actual.getTheftGame()== num) {
+				search.add(actual);
 			}
-		
-			
 		}
 		
 		return search;
@@ -191,6 +159,20 @@ public class FIBA {
 		return search;
 	}
 
+	public void readPlayerSerializable() {
+		
+		try {
+			FileInputStream fileInput= new FileInputStream(new File("./sources/players.txt"));
+			ObjectInputStream reader= new ObjectInputStream(fileInput);
+			
+			root= (ABB<Double, Player>) reader.readObject();
+			reader.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
 	public void savePlayerSerializable( ){
 		
 		try{
@@ -210,30 +192,7 @@ public class FIBA {
 		
 	} 
 	
-//	public void persistenceOn() throws FileNotFoundException, IOException, ClassNotFoundException {
-//		// TODO test it
-//		// initialize players added:
-//		ObjectInputStream hashMapReader = new ObjectInputStream(new FileInputStream(./docs));
-//		this.playersAdded = (HashMap<String, Integer>) hashMapReader.readObject();
-//		hashMapReader.close();
-//		// initialize bts tree:
-//		ObjectInputStream btsReader = new ObjectInputStream(new FileInputStream(BTS_OBJECT_PATH));
-//		this.BTSTree = (BinarySearchTree) btsReader.readObject();
-//		btsReader.close();
-//		// initialize avl tree:
-//		ObjectInputStream avlReader = new ObjectInputStream(new FileInputStream(AVL_OBJECT_PATH));
-//		this.AVlTree = (AVLTree) avlReader.readObject();
-//		avlReader.close();
-//		// initialize red black tree:
-//		ObjectInputStream rbReader = new ObjectInputStream(new FileInputStream(RBT_OBJECT_PATH));
-//		this.RBTree = (RedBlackTree) rbReader.readObject();
-//		rbReader.close();
-//		// initialize queue with availabe indexs
-//		ObjectInputStream queueReader = new ObjectInputStream(new FileInputStream(QUEUE_OBJECT_PATH));
-//		this.availableIndexs = (Queue<Integer>) queueReader.readObject();
-//		queueReader.close();
-//
-//	}
+
 	
 	
 	
